@@ -12,6 +12,7 @@ import EditIcon from '@mui/icons-material/Edit';
 import {useDeleteTodo} from "../hooks/useDeleteTodo";
 import {useEditTodo} from '../hooks/useEditTodo'
 import styles from '../App.module.css'
+import {Link} from 'react-router-dom'
 
 
 export const TodoItem = ({labelId, todo, refreshTodos}) => {
@@ -42,8 +43,9 @@ export const TodoItem = ({labelId, todo, refreshTodos}) => {
             disablePadding
             className={todo.isShown ? styles.active : styles.hidden}
         >
-            <ListItemButton role={undefined} onClick={handleToggle(todo)} dense>
-                <ListItemIcon>
+            <Link to={`task/${todo.id}`}>
+                <ListItemButton role={undefined} onClick={handleToggle(todo)} dense>
+                    {/*<ListItemIcon>
                     <Checkbox
                         edge="start"
                         checked={checked.indexOf(todo) !== -1}
@@ -51,17 +53,19 @@ export const TodoItem = ({labelId, todo, refreshTodos}) => {
                         disableRipple
                         inputProps={{ 'aria-labelledby': labelId }}
                     />
-                </ListItemIcon>
-                <ListItemText id={labelId}>{todo.title}</ListItemText>
-                <ButtonGroup variant="text" aria-label="Basic button group">
+                </ListItemIcon>*/}
+                    <ListItemText id={labelId}>{todo.title}</ListItemText>
+                    {/* <ButtonGroup variant="text" aria-label="Basic button group">
                     <Button onClick={useDeleteTodo(refreshTodos, todo.id)}>
                         <DeleteOutlineIcon></DeleteOutlineIcon>
                     </Button>
                     <Button onClick={useEditTodo(refreshTodos, todo.title, todo.id)}>
                         <EditIcon></EditIcon>
                     </Button>
-                </ButtonGroup>
-            </ListItemButton>
+                </ButtonGroup>*/}
+                </ListItemButton>
+            </Link>
+
         </ListItem>
     )
 }
