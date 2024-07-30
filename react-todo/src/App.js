@@ -2,37 +2,48 @@ import './App.module.css';
 import styles from './App.module.css'
 import * as React from 'react';
 import {useState} from 'react';
-import {Routes, Route, useParams, Link} from 'react-router-dom'
+import {Routes, Route, Navigate} from 'react-router-dom'
 import {MainPage} from './components/pages/MainPage'
 import {TaskPage} from './components/pages/TaskPage'
 import {NotFoundPage} from './components/pages/NotFoundPage'
 import {useGetTodos} from "./hooks/useGetTodos";
+import { TailSpin } from 'react-loader-spinner';
+import {LoaderSpin} from './components/loader-spin'
 
 
 
 export const App = () => {
 
     const [refreshTodosFlag, setRefreshTodosFlag] = useState(false)
+    const [alphabetFlag, setAlphabetFlag] = useState(false);
     const refreshTodos = () => setRefreshTodosFlag(!refreshTodosFlag)
     console.log('app js')
-    let {todos} = useGetTodos(refreshTodosFlag)
-    console.log(todos)
+
+    const [isLoading, setIsLoading] = useState(true);
+    let {todos} = useGetTodos(refreshTodosFlag, alphabetFlag, setIsLoading)
+
+    if (isLoading) {
+        return <LoaderSpin />
+    }
 
     return (
       <div className={styles.wrapper}>
           <h1>Todo App</h1>
           <Routes>
               <Route path="/" element={< MainPage
-                  refreshTodosFlag={refreshTodosFlag}
                   refreshTodos={refreshTodos}
                   todos={todos}
+                  setAlphabetFlag={setAlphabetFlag}
+                  alphabetFlag={alphabetFlag}
               /> } />
               <Route path="/task/:id" element={< TaskPage
-                  refreshTodosFlag={refreshTodosFlag}
                   refreshTodos={refreshTodos}
                   todos={todos}
-              />} />
+                  isLoading={isLoading}
+              />}
+              />
               <Route path="/404" element={<NotFoundPage/>} />
+              <Route path="*" element={<Navigate to="/404" />} />
           </Routes>
       </div>
   )

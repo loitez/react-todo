@@ -1,5 +1,4 @@
 import {useState} from "react";
-import {useGetTodos} from "../../hooks/useGetTodos";
 import styles from "../../App.module.css";
 import Button from "@mui/material/Button";
 import {useAddTodo} from "../../hooks/useAddTodo";
@@ -9,12 +8,9 @@ import {TodoItem} from "../todo-item";
 import * as React from "react";
 
 export const MainPage = (props) => {
-    console.log('MAIN PAGE')
-    const [alphabetFlag, setAlphabetFlag] = useState(false);
-    let {refreshTodosFlag, refreshTodos} = props;
-    let {todos} = useGetTodos(refreshTodosFlag, alphabetFlag)
-    // let {todos} = useGetTodos(refreshTodosFlag, alphabetFlag)
+    let {refreshTodos, todos, setAlphabetFlag, alphabetFlag} = props;
     const [searchBtnValue, setSearchBtnValue] = useState('');
+
 
     const onSearchBtnChange = (e) => {
         setSearchBtnValue(e.target.value);
@@ -25,8 +21,8 @@ export const MainPage = (props) => {
 
     const onAlphabetBtnClick = () => {
         setAlphabetFlag(!alphabetFlag)
-        console.log(alphabetFlag)
     }
+
 
     return (
         <>
@@ -45,7 +41,7 @@ export const MainPage = (props) => {
                     {todos.map((todo) => {
                         const labelId = `checkbox-list-label-${todo}`;
                         return (
-                            <TodoItem value={labelId} todo={todo} refreshTodos={refreshTodos} key={todo.id}/>
+                            <TodoItem value={labelId} todo={todo} key={todo.id}/>
                         );
                     })}
                 </List>

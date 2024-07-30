@@ -5,7 +5,7 @@ export const useDeleteTodo = (refreshTodos, id) => {
     const navigate = useNavigate()
 
     const deleteTodo = () => {
-        fetch(`http://localhost:3001/todos/${id}`,
+        fetch(`http://localhost:3000/todos/${id}`,
             {
                 method: 'DELETE'
             })

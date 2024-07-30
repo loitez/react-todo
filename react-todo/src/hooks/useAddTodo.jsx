@@ -3,7 +3,7 @@ export const useAddTodo = (refreshTodos) => {
 
         const newTodoText = prompt('Type task title')
 
-        fetch(`http://localhost:3001/todos/`,
+        fetch(`http://localhost:3000/todos/`,
             {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json;charset=utf-8'},

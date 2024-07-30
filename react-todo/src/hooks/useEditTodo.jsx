@@ -1,8 +1,8 @@
 export const useEditTodo = (refreshTodos, text, id) => {
     const editTodo = () => {
-        const editedTodoText = prompt('Edit task', text)
+        const editedTodoText = prompt('Edit task', text) || text;
         if (editedTodoText.length > 0) {
-            fetch(`http://localhost:3001/todos/${id}`,
+            fetch(`http://localhost:3000/todos/${id}`,
                 {
                     method: 'PUT',
                     headers: {'Content-Type': 'application/json;charset=utf-8'},
