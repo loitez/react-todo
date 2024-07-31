@@ -23,7 +23,6 @@ export const MainPage = (props) => {
         setAlphabetFlag(!alphabetFlag)
     }
 
-
     return (
         <>
             <div className={styles.buttonGroup}>
@@ -31,13 +30,10 @@ export const MainPage = (props) => {
                 <Button variant="outlined" onClick={onAlphabetBtnClick}>
                     {alphabetFlag ? 'Sort non-alphabetically' : 'Sort alphabetically'}
                 </Button>
-                <TextField id="outlined-basic" label="Search" variant="outlined" onChange={onSearchBtnChange}
-                           value={searchBtnValue}/>
-
+                <TextField id="outlined-basic" label="Search" variant="outlined" onChange={onSearchBtnChange} value={searchBtnValue}/>
             </div>
             {todos.length > 0 ?
                 <List sx={{width: '100%', bgcolor: 'background.paper'}}>
-
                     {todos.map((todo) => {
                         const labelId = `checkbox-list-label-${todo}`;
                         return (

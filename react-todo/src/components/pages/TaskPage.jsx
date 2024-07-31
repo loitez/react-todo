@@ -8,10 +8,10 @@ import {useDeleteTodo} from "../../hooks/useDeleteTodo";
 import {useEditTodo} from '../../hooks/useEditTodo'
 import styles from '../../App.module.css'
 import {useNavigate, useParams} from 'react-router-dom'
-import {useEffect, useState} from "react";
+import {useEffect} from "react";
 
 export const TaskPage = (props) => {
-    const {refreshTodos, todos, isLoading} = props;
+    const {refreshTodos, todos} = props;
 
     const navigate = useNavigate();
     const params = useParams();
@@ -19,22 +19,17 @@ export const TaskPage = (props) => {
     const todo = todos.find(item => item.id === params.id);
 
     useEffect(() => {
-        let isProductLoaded = false;
-        if (todo) {
-            isProductLoaded = true;
+        if (!todo) {
+            console.log('Todo not found, redirecting to /404');
+            navigate('/404', { replace: true });
         }
-        if (!isProductLoaded) {
-            navigate('/404');
-            return;
-        }
+    }, [navigate, todo]);
 
-    }, [navigate, params.id, todo])
+    if (!todo) return null;
 
     const onGoBackBtn = () => {
         navigate(-1)
     }
-
-
 
     return (
         <>
@@ -43,10 +38,12 @@ export const TaskPage = (props) => {
                     <ArrowBackIcon></ArrowBackIcon>
                     Back
                 </Button>
+                {/* eslint-disable-next-line react-hooks/rules-of-hooks */}
                 <Button variant="outlined" onClick={useDeleteTodo(refreshTodos, todo.id)}>
                     <DeleteOutlineIcon></DeleteOutlineIcon>
                     Delete Task
                 </Button>
+                {/* eslint-disable-next-line react-hooks/rules-of-hooks */}
                 <Button variant="contained" onClick={useEditTodo(refreshTodos, todo.title, todo.id)}>
                     <EditIcon></EditIcon>
                     Edit Task

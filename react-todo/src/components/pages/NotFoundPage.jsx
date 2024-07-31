@@ -1,5 +1,10 @@
+import SentimentVeryDissatisfiedIcon from '@mui/icons-material/SentimentVeryDissatisfied';
+
 export const NotFoundPage = () => {
     return (
-        <p>Not Found</p>
+        <>
+            <SentimentVeryDissatisfiedIcon></SentimentVeryDissatisfiedIcon>
+            <p>That page does not exist</p>
+        </>
     )
 }

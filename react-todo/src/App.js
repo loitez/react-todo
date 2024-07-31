@@ -7,17 +7,13 @@ import {MainPage} from './components/pages/MainPage'
 import {TaskPage} from './components/pages/TaskPage'
 import {NotFoundPage} from './components/pages/NotFoundPage'
 import {useGetTodos} from "./hooks/useGetTodos";
-import { TailSpin } from 'react-loader-spinner';
 import {LoaderSpin} from './components/loader-spin'
-
-
 
 export const App = () => {
 
     const [refreshTodosFlag, setRefreshTodosFlag] = useState(false)
     const [alphabetFlag, setAlphabetFlag] = useState(false);
     const refreshTodos = () => setRefreshTodosFlag(!refreshTodosFlag)
-    console.log('app js')
 
     const [isLoading, setIsLoading] = useState(true);
     let {todos} = useGetTodos(refreshTodosFlag, alphabetFlag, setIsLoading)
@@ -39,7 +35,6 @@ export const App = () => {
               <Route path="/task/:id" element={< TaskPage
                   refreshTodos={refreshTodos}
                   todos={todos}
-                  isLoading={isLoading}
               />}
               />
               <Route path="/404" element={<NotFoundPage/>} />
