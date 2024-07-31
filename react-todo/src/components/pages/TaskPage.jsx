@@ -8,13 +8,15 @@ import {useDeleteTodo} from "../../hooks/useDeleteTodo";
 import {useEditTodo} from '../../hooks/useEditTodo'
 import styles from '../../App.module.css'
 import {useNavigate, useParams} from 'react-router-dom'
-import {useEffect} from "react";
+import {useEffect, useContext} from "react";
+import { AppContext } from '../../context';
 
-export const TaskPage = (props) => {
-    const {refreshTodos, todos} = props;
+export const TaskPage = () => {
 
     const navigate = useNavigate();
     const params = useParams();
+
+    const { refreshTodos, todos } = useContext(AppContext);
 
     const todo = todos.find(item => item.id === params.id);
 

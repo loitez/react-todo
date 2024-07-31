@@ -6,11 +6,14 @@ import TextField from "@mui/material/TextField";
 import List from "@mui/material/List";
 import {TodoItem} from "../todo-item";
 import * as React from "react";
+import { AppContext } from '../../context';
+import { useContext } from 'react';
 
 export const MainPage = (props) => {
-    let {refreshTodos, todos, setAlphabetFlag, alphabetFlag} = props;
+    let {setAlphabetFlag, alphabetFlag} = props;
     const [searchBtnValue, setSearchBtnValue] = useState('');
 
+    const { refreshTodos, todos } = useContext(AppContext);
 
     const onSearchBtnChange = (e) => {
         setSearchBtnValue(e.target.value);
