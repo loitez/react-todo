@@ -12,7 +12,8 @@ import {useEffect, useContext} from "react";
 import { AppContext } from '../../context';
 
 export const TaskPage = () => {
-
+    const deleteTodo = useDeleteTodo
+    const editTodo = useEditTodo
     const navigate = useNavigate();
     const params = useParams();
 
@@ -40,13 +41,11 @@ export const TaskPage = () => {
                     <ArrowBackIcon></ArrowBackIcon>
                     Back
                 </Button>
-                {/* eslint-disable-next-line react-hooks/rules-of-hooks */}
-                <Button variant="outlined" onClick={useDeleteTodo(refreshTodos, todo.id)}>
+                <Button variant="outlined" onClick={deleteTodo(refreshTodos, todo.id)}>
                     <DeleteOutlineIcon></DeleteOutlineIcon>
                     Delete Task
                 </Button>
-                {/* eslint-disable-next-line react-hooks/rules-of-hooks */}
-                <Button variant="contained" onClick={useEditTodo(refreshTodos, todo.title, todo.id)}>
+                <Button variant="contained" onClick={editTodo(refreshTodos, todo.title, todo.id)}>
                     <EditIcon></EditIcon>
                     Edit Task
                 </Button>
