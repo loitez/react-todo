@@ -4,15 +4,12 @@ import Button from '@mui/material/Button';
 import DeleteOutlineIcon from '@mui/icons-material/DeleteOutline';
 import EditIcon from '@mui/icons-material/Edit';
 import ArrowBackIcon from '@mui/icons-material/ArrowBack';
-import {useDeleteTodo} from "../../hooks/useDeleteTodo";
-import {useEditTodo} from '../../hooks/useEditTodo'
 import styles from '../../App.module.css'
 import {useNavigate, useParams} from 'react-router-dom'
-import {useEffect, useContext} from "react";
-import { AppContext } from '../../context';
+import {useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
 import {selectTodos} from "../../selectors";
-import {deleteTodo, editTodo, setLoadingStatus} from "../../actions";
+import {deleteTodo, editTodo} from "../../actions";
 
 export const TaskPage = (props) => {
     const navigate = useNavigate();
@@ -24,11 +21,10 @@ export const TaskPage = (props) => {
 
     const todo = todos.find(item => item.id === params.id);
 
-    const {isLoading, setIsLoading} = props;
+    const {setIsLoading} = props;
 
     useEffect(() => {
         if (!todo) {
-            console.log('Todo not found, redirecting to /404');
             navigate('/404', { replace: true });
         }
         setIsLoading(false)
@@ -41,7 +37,6 @@ export const TaskPage = (props) => {
     }
 
     const onDeleteTodoClick = () => {
-        console.log(todo.id)
         dispatch(deleteTodo(todo.id))
         navigate(-1)
     }
@@ -70,7 +65,6 @@ export const TaskPage = (props) => {
                     <EditIcon></EditIcon>
                     Edit Task
                 </Button>
-
             </div>
             <ListItem
                 key={todo}

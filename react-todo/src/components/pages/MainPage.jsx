@@ -1,17 +1,13 @@
-import {useEffect, useState} from "react";
+import {useState} from "react";
 import styles from "../../App.module.css";
 import Button from "@mui/material/Button";
-import {useAddTodo} from "../../hooks/useAddTodo";
 import TextField from "@mui/material/TextField";
 import List from "@mui/material/List";
 import {TodoItem} from "../todo-item";
 import * as React from "react";
-import { AppContext } from '../../context';
-import { useContext } from 'react';
 import {selectTodos} from "../../selectors";
 import {useDispatch, useSelector} from "react-redux";
-import {addTodo, getTodos, setLoadingStatus} from "../../actions";
-
+import {addTodo, getTodos} from "../../actions";
 
 export const MainPage = (props) => {
     const [alphabetFlag, setAlphabetFlag] = useState(false);
@@ -20,22 +16,17 @@ export const MainPage = (props) => {
     const [searchBtnValue, setSearchBtnValue] = useState('');
 
     const todos = useSelector(selectTodos)
-    console.log(todos)
 
     const {isLoading, setIsLoading} = props;
 
-
     const onSearchBtnChange = (e) => {
-        let searchValue = e.target.value
         setSearchBtnValue(e.target.value);
         todos.map((todo) => {
             !todo.title.includes(e.target.value) ? todo.isShown = false : todo.isShown = true
         })
-        // dispatch(searchTodo(todos,searchValue))
     }
 
     const onAlphabetBtnClick = () => {
-        console.log('alphabetclick')
         setAlphabetFlag(!alphabetFlag)
         dispatch(getTodos(isLoading, setIsLoading, !alphabetFlag))
     }
