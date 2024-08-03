@@ -20,8 +20,6 @@ export const useAddTodo = (refreshTodos) => {
         } else {
             alert('Task should not be empty')
         }
-
-
     }
     return addTodo
 }

@@ -1,0 +1,1 @@
+export const selectLoadingStatus = (state) => state.auxiliaryState.isLoading

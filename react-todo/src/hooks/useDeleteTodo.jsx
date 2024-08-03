@@ -10,10 +10,7 @@ export const useDeleteTodo = (refreshTodos, id) => {
                 method: 'DELETE'
             })
             .then((loadedData) => loadedData.json())
-            .then((loadedTodos) => {
-                refreshTodos()
-                navigate(-1)
-            })
+
     }
     return deleteTodo
 }
